@@ -1,14 +1,17 @@
-# Use the official Python image as the base image
-FROM python:3.8
+# Use the official Python image from the Docker Hub
+FROM python:3.9
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the application files into the working directory
-#COPY . /app
+# Copy the requirements file into the Docker image
+COPY requirements.txt .
 
-# Install the application dependencies
+# Install the dependencies
 RUN pip install -r requirements.txt
 
-# Define the entry point for the container
-CMD ["python3", "main.py"]
+# Copy the rest of your application code
+COPY . .
+
+# Define the command to run the application
+CMD ["python", "main.py"]
